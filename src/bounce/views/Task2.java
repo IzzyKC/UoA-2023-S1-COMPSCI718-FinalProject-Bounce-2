@@ -26,15 +26,16 @@ public class Task2 extends Task1 implements ShapeModelListener {
      */
     @Override
     public void update(ShapeModelEvent event) {
+        if(event == null) return;
 
         int[] childIndices = new int[1];
         Object[] children = new Object[1];
         childIndices[0] = event.index();
         children[0] = event.operand();
         ShapeModel shapeModel = event.source();
-        TreePath treePath = new TreePath( event.parent().path().toArray());
+        TreePath treePath =  event.parent() == null ? null : new TreePath(event.parent().path().toArray());
         TreeModelEvent treeModelEvent = new TreeModelEvent(shapeModel,
-                treePath , childIndices, children);
+                treePath, childIndices, children);
 
         if (event.eventType() == ShapeModelEvent.EventType.ShapeAdded) {
 
