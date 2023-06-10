@@ -61,4 +61,9 @@ public interface Painter {
      * image. Parameters width and height specify its width and height.
      */
     public void drawImage(Image img, int x, int y, int width, int height);
+
+    /**
+     * Draws a GemShape from left-most vertex and proceeding in a clockwise direction
+     */
+    public void drawGemShape(int x, int y, int width, int height);
 }

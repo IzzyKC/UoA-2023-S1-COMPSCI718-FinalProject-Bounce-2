@@ -1,9 +1,6 @@
 package bounce;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.FontMetrics;
-import java.awt.Image;
+import java.awt.*;
 
 /**
  * Implementation of the Painter interface that delegates drawing to a
@@ -23,7 +20,7 @@ public class GraphicsPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawRect
+     * see bounce.Painter.drawRect
      */
     @Override
     public void drawRect(int x, int y, int width, int height) {
@@ -31,7 +28,7 @@ public class GraphicsPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawOval
+     * see bounce.Painter.drawOval
      */
     @Override
     public void drawOval(int x, int y, int width, int height) {
@@ -39,7 +36,7 @@ public class GraphicsPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawLine
+     * see bounce.Painter.drawLine
      */
     @Override
     public void drawLine(int x1, int y1, int x2, int y2) {
@@ -47,7 +44,7 @@ public class GraphicsPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.fillRect
+     * see bounce.Painter.fillRect
      */
     @Override
     public void fillRect(int x, int y, int width, int height) {
@@ -55,7 +52,7 @@ public class GraphicsPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.getColor
+     * see bounce.Painter.getColor
      */
     @Override
     public Color getColor() {
@@ -63,7 +60,7 @@ public class GraphicsPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.setColor
+     * see bounce.Painter.setColor
      */
     @Override
     public void setColor(Color color) {
@@ -71,7 +68,7 @@ public class GraphicsPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawCenteredText
+     * see bounce.Painter.drawCenteredText
      */
     @Override
     public void drawCenteredText(String text, int x, int y) {
@@ -91,7 +88,7 @@ public class GraphicsPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawCenteredText
+     * see bounce.Painter.drawCenteredText
      */
     @Override
     public void translate(int x, int y) {
@@ -99,10 +96,40 @@ public class GraphicsPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawImage
+     * see bounce.Painter.drawImage
      */
     @Override
     public void drawImage(Image img, int x, int y, int width, int height) {
         g.drawImage(img, x, y, width, height, null);
+    }
+
+    /**
+     * see bounce.Painter.drawGemShape
+     * draw two types of GemShape by its width parameter
+     * if the width of a Gemshape is less than 40 pixels, the top-left and top-right
+     * vertices are both positioned at point (x+width/2, y). Similarly, the bottom-left and
+     * bottom-right vertices are both positioned at point (x+width/2, y+height). In other
+     * words, “small” GemShapes are four-sided figures.
+     * drawing starts from left-most vertex and proceeding in a clockwise direction.
+     */
+    @Override
+    public void drawGemShape(int x, int y, int width, int height) {
+        Polygon gemShape = new Polygon();
+        if (width < 40) {
+            //add four sides diamond
+            gemShape.addPoint(x, y + height / 2);
+            gemShape.addPoint(x + width / 2, y);
+            gemShape.addPoint(x + width, y + height / 2);
+            gemShape.addPoint(x + width / 2, y + height);
+        } else {
+            //add six sides hexagon
+            gemShape.addPoint(x, y + height / 2);
+            gemShape.addPoint(x + 20, y);
+            gemShape.addPoint(x + width - 20, y);
+            gemShape.addPoint(x + width, y + height / 2);
+            gemShape.addPoint(x + width - 20, y + height);
+            gemShape.addPoint(x + 20, y + height);
+        }
+        g.drawPolygon(gemShape);
     }
 }

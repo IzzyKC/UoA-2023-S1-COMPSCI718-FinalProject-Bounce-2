@@ -18,7 +18,7 @@ public class MockPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawRect
+     * see bounce.Painter.drawRect
      */
     @Override
     public void drawRect(int x, int y, int width, int height) {
@@ -26,7 +26,7 @@ public class MockPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.fillRect
+     * see bounce.Painter.fillRect
      */
     @Override
     public void fillRect(int x, int y, int width, int height) {
@@ -34,7 +34,7 @@ public class MockPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawOval
+     * see bounce.Painter.drawOval
      */
     @Override
     public void drawOval(int x, int y, int width, int height) {
@@ -42,7 +42,7 @@ public class MockPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawLine
+     * see bounce.Painter.drawLine
      */
     @Override
     public void drawLine(int x1, int y1, int x2, int y2) {
@@ -50,7 +50,7 @@ public class MockPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawRect
+     * see bounce.Painter.drawRect
      * Always returns null.
      */
     @Override
@@ -59,7 +59,7 @@ public class MockPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.setColor
+     * see bounce.Painter.setColor
      */
     @Override
     public void setColor(Color color) {
@@ -67,7 +67,7 @@ public class MockPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawCenteredText
+     * see bounce.Painter.drawCenteredText
      */
     @Override
     public void drawCenteredText(String text, int x, int y) {
@@ -75,7 +75,7 @@ public class MockPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.translate
+     * see bounce.Painter.translate
      */
     @Override
     public void translate(int x, int y) {
@@ -83,9 +83,14 @@ public class MockPainter implements Painter {
     }
 
     /**
-     * @see bounce.Painter.drawCenteredText
+     * see bounce.Painter.drawImage
      */
     @Override
     public void drawImage(Image img, int x, int y, int width, int height) {
+    }
+
+    @Override
+    public void drawGemShape(int x, int y, int width, int height) {
+
     }
 }
