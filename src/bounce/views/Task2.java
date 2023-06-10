@@ -26,8 +26,6 @@ public class Task2 extends Task1 implements ShapeModelListener {
      */
     @Override
     public void update(ShapeModelEvent event) {
-        if(event == null) return;
-
         int[] childIndices = new int[1];
         Object[] children = new Object[1];
         childIndices[0] = event.index();
