@@ -8,15 +8,19 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
  * TODO Complete this class to display a ShapeModel's shape composition on the JTree
  */
 public class Task1 implements TreeModel {
-    private ShapeModel _adaptee;
+    protected ShapeModel _adaptee;
+
+    protected List<TreeModelListener> _treeModelListenerList;
 
     public Task1(ShapeModel shapeModel) {
         this._adaptee = shapeModel;
+        _treeModelListenerList = new ArrayList<>();
 
     }
 
@@ -64,11 +68,9 @@ public class Task1 implements TreeModel {
 
     @Override
     public int getIndexOfChild(Object parent, Object child) {
-        if(parent == null || child == null) return -1;
-        if(parent instanceof NestingShape){
-            Shape childShape = (child instanceof Shape) ? (Shape) child : null;
-            return ((NestingShape) parent).indexOf(childShape);
-        }
+        if(parent instanceof NestingShape)
+            return ((NestingShape) parent).indexOf((Shape) child);
+
         return -1;
     }
 
@@ -78,6 +80,7 @@ public class Task1 implements TreeModel {
      */
     @Override
     public void addTreeModelListener(TreeModelListener l) {
+        _treeModelListenerList.add(l);
 
     }
 
@@ -87,6 +90,7 @@ public class Task1 implements TreeModel {
      */
     @Override
     public void removeTreeModelListener(TreeModelListener l) {
+        _treeModelListenerList.remove(l);
 
     }
 }
