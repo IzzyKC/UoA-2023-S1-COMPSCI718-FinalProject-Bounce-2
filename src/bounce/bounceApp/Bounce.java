@@ -210,7 +210,20 @@ public class Bounce extends JPanel {
         cutPasteShape.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Shape selection = shapeSelected;
+                if("Cut".equals(e.getActionCommand())) {
+                    shapeToPaste = selection;
+                    treeView.setSelectionPath(new TreePath(shapeToPaste.parent().path().toArray()));
+                    model.cut(shapeToPaste);
+                    cutPasteShape.setText("Paste");
+                }else if("Paste".equals(e.getActionCommand())){
+                    boolean success = model.paste(shapeToPaste, (NestingShape) selection);
+                    if(success) {
+                        shapeToPaste = null;
+                        cutPasteShape.setText("Cut");
+                        cutPasteShape.setEnabled(shapeSelected != model.root());
+                    }
+                }
             }
         });
 
@@ -246,7 +259,17 @@ public class Bounce extends JPanel {
                  * TODO Enable button cutPasteShape only if what is selected
                  *  in the JTree can be cut or pasted
                  */
-
+                if(cutPasteShape.getText().equals("Cut")) {
+                    //allow users to cut any shape (except the root)
+                    cutPasteShape.setEnabled(shapeSelected != model.root());
+                } if(cutPasteShape.getText().equals("Paste")){
+                    //destination is a NestingShape, can fit the shape to be pasted
+                    //shape to be pasted not be the ancestor of the destination shape
+                    cutPasteShape.setEnabled(shapeSelected instanceof NestingShape
+                            && (shapeSelected.parent() == null || !shapeSelected.parent().path().contains(shapeToPaste))
+                            && shapeSelected.width() > shapeToPaste.width()
+                            && shapeSelected.height() > shapeToPaste.height());
+                }
 
                 /*
                  * Tell the table model to represent the shape that is now

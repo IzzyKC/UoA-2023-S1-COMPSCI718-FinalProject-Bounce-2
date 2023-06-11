@@ -112,7 +112,7 @@ public class ShapeModel {
     }
 
     /**
-     * Deregisters a ShapeModelListener from this ShapeModel object.
+     * Registers a ShapeModelListener from this ShapeModel object.
      */
     public void removeShapeModelListener(ShapeModelListener listener) {
         listeners.remove(listener);
@@ -127,11 +127,35 @@ public class ShapeModel {
             listener.update(event);
         }
     }
-
     /*
      * TODO Implement appropriate method(s) for the cut and paste feature
      *  where a selected shape is moved to a new destination.
      *  Hint: the destination is a NestingShape
      */
+    public void cut(Shape shapeToPaste){
+        //store original parent before remove
+        NestingShape parent = shapeToPaste.parent();
+        if(parent != null) {
+            int index = shapeToPaste.parent.indexOf(shapeToPaste);
+            shapeToPaste.parent.remove(shapeToPaste);
+            fire(ShapeModelEvent.makeShapeRemovedEvent(shapeToPaste, parent, index, this));
+        }
+    }
+    public boolean paste(Shape shapeToPaste, NestingShape destination){
+        boolean success = true;
+        shapeToPaste.move(destination.width(), destination.height());
+        try {
+            destination.add(shapeToPaste);
+        }catch(IllegalArgumentException e){
+            System.out.println("error: " + e.getMessage());
+            success = false;
+        }catch(Exception e){
+            System.out.println("error: " + e.getMessage());
+            success = false;
+        }
+        fire(ShapeModelEvent.makeShapeAddedEvent(shapeToPaste,this));
+        return success;
+
+    }
 
 }

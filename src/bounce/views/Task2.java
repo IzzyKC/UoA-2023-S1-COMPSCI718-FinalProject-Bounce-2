@@ -31,17 +31,16 @@ public class Task2 extends Task1 implements ShapeModelListener {
         childIndices[0] = event.index();
         children[0] = event.operand();
         ShapeModel shapeModel = event.source();
-        TreePath treePath =  event.parent() == null ? null : new TreePath(event.parent().path().toArray());
-        TreeModelEvent treeModelEvent = new TreeModelEvent(shapeModel,
-                treePath, childIndices, children);
 
         if (event.eventType() == ShapeModelEvent.EventType.ShapeAdded) {
-
+            TreeModelEvent treeModelEvent = new TreeModelEvent(shapeModel,
+                    event.parent().path().toArray(), childIndices, children);
             for(TreeModelListener  l : this._treeModelListenerList)
                 l.treeNodesInserted(treeModelEvent);
 
         } else if (event.eventType() == ShapeModelEvent.EventType.ShapeRemoved) {
-
+            TreeModelEvent treeModelEvent = new TreeModelEvent(shapeModel,
+                    event.parent() == null ? null : event.parent().path().toArray(), childIndices, children);
             for(TreeModelListener l: this._treeModelListenerList)
                 l.treeNodesRemoved(treeModelEvent);
 

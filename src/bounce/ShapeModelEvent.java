@@ -12,8 +12,6 @@ public class ShapeModelEvent {
     // Set of event types.
     public enum EventType {ShapeAdded, ShapeRemoved, ShapeMoved}
 
-    ;
-
     private EventType type;      // Type of event.
     private Shape operand;       // Shape to which the event relates.
     private ShapeModel source;   // ShapeModel object that fired the event.
