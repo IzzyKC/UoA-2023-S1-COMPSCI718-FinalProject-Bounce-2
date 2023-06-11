@@ -57,7 +57,7 @@ public class FormResolver {
 		if(shapeClass == DynamicRectangleShape.class) {
 			handler = new DynamicRectangleShapeFormHandler(model, parent);
 		} else if(shapeClass == ImageRectangleShape.class) {
-			handler = new SimpleImageShapeFormHandler(model, parent);
+			handler = new ImageShapeFormHandler(model, parent);
 		} else {
 			handler = new ShapeFormHandler(shapeClass, model, parent);
 		}
