@@ -329,7 +329,7 @@ public class Bounce extends JPanel {
         JPanel tablePanel = new JPanel();
         tablePanel.setBorder(BorderFactory.createTitledBorder("Shape state"));
         JScrollPane scrollPaneForTable = new JScrollPane(tabularView);
-        scrollPaneForTable.setPreferredSize(new Dimension(810, 50));//TODO 150
+        scrollPaneForTable.setPreferredSize(new Dimension(810, 150));
         tablePanel.add(scrollPaneForTable);
 
         /*
