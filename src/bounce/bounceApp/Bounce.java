@@ -213,10 +213,11 @@ public class Bounce extends JPanel {
                 Shape selection = shapeSelected;
                 if("Cut".equals(e.getActionCommand())) {
                     shapeToPaste = selection;
+                    cutPasteShape.setText("Paste");
+                    treeView.setSelectionPath(new TreePath(shapeToPaste.parent().path().toArray()));
+                }else if("Paste".equals(e.getActionCommand())){
                     treeView.setSelectionPath(new TreePath(shapeToPaste.parent().path().toArray()));
                     model.cut(shapeToPaste);
-                    cutPasteShape.setText("Paste");
-                }else if("Paste".equals(e.getActionCommand())){
                     boolean success = model.paste(shapeToPaste, (NestingShape) selection);
                     if(success) {
                         shapeToPaste = null;
@@ -265,7 +266,8 @@ public class Bounce extends JPanel {
                 } if(cutPasteShape.getText().equals("Paste")){
                     //destination is a NestingShape, can fit the shape to be pasted
                     //shape to be pasted not be the ancestor of the destination shape
-                    cutPasteShape.setEnabled(shapeSelected instanceof NestingShape
+                    cutPasteShape.setEnabled(shapeToPaste != null
+                            && shapeSelected instanceof NestingShape
                             && (shapeSelected.parent() == null || !shapeSelected.parent().path().contains(shapeToPaste))
                             && shapeSelected.width() > shapeToPaste.width()
                             && shapeSelected.height() > shapeToPaste.height());
@@ -327,7 +329,7 @@ public class Bounce extends JPanel {
         JPanel tablePanel = new JPanel();
         tablePanel.setBorder(BorderFactory.createTitledBorder("Shape state"));
         JScrollPane scrollPaneForTable = new JScrollPane(tabularView);
-        scrollPaneForTable.setPreferredSize(new Dimension(810, 150));
+        scrollPaneForTable.setPreferredSize(new Dimension(810, 50));//TODO 150
         tablePanel.add(scrollPaneForTable);
 
         /*
