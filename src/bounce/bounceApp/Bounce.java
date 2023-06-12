@@ -217,8 +217,7 @@ public class Bounce extends JPanel {
                     treeView.setSelectionPath(new TreePath(shapeToPaste.parent().path().toArray()));
                 }else if("Paste".equals(e.getActionCommand())){
                     treeView.setSelectionPath(new TreePath(shapeToPaste.parent().path().toArray()));
-                    model.cut(shapeToPaste);
-                    boolean success = model.paste(shapeToPaste, (NestingShape) selection);
+                    boolean success = model.cutAndPaste(shapeToPaste, (NestingShape) selection);
                     if(success) {
                         shapeToPaste = null;
                         cutPasteShape.setText("Cut");

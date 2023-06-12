@@ -132,7 +132,8 @@ public class ShapeModel {
      *  where a selected shape is moved to a new destination.
      *  Hint: the destination is a NestingShape
      */
-    public void cut(Shape shapeToPaste){
+    public boolean cutAndPaste(Shape shapeToPaste, NestingShape destination){
+        boolean success = true;
         //store original parent before remove
         NestingShape parent = shapeToPaste.parent();
         if(parent != null) {
@@ -140,9 +141,6 @@ public class ShapeModel {
             shapeToPaste.parent.remove(shapeToPaste);
             fire(ShapeModelEvent.makeShapeRemovedEvent(shapeToPaste, parent, index, this));
         }
-    }
-    public boolean paste(Shape shapeToPaste, NestingShape destination){
-        boolean success = true;
         shapeToPaste.move(destination.width(), destination.height());
         try {
             destination.add(shapeToPaste);
