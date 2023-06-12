@@ -134,16 +134,18 @@ public class ShapeModel {
      */
     public boolean cutAndPaste(Shape shapeToPaste, NestingShape destination){
         boolean success = true;
-        //store original parent before remove
-        NestingShape parent = shapeToPaste.parent();
-        if(parent != null) {
-            int index = shapeToPaste.parent.indexOf(shapeToPaste);
-            shapeToPaste.parent.remove(shapeToPaste);
-            fire(ShapeModelEvent.makeShapeRemovedEvent(shapeToPaste, parent, index, this));
-        }
-        shapeToPaste.move(destination.width(), destination.height());
+
         try {
+            //store original parent before remove
+            NestingShape parent = shapeToPaste.parent();
+            if(parent != null) {
+                int index = shapeToPaste.parent.indexOf(shapeToPaste);
+                shapeToPaste.parent.remove(shapeToPaste);
+                fire(ShapeModelEvent.makeShapeRemovedEvent(shapeToPaste, parent, index, this));
+            }
+            shapeToPaste.move(destination.width(), destination.height());
             destination.add(shapeToPaste);
+            fire(ShapeModelEvent.makeShapeAddedEvent(shapeToPaste,this));
         }catch(IllegalArgumentException e){
             System.out.println("error: " + e.getMessage());
             success = false;
@@ -151,7 +153,7 @@ public class ShapeModel {
             System.out.println("error: " + e.getMessage());
             success = false;
         }
-        fire(ShapeModelEvent.makeShapeAddedEvent(shapeToPaste,this));
+
         return success;
 
     }
