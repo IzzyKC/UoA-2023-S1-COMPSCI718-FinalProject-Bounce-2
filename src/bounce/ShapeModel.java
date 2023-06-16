@@ -135,7 +135,7 @@ public class ShapeModel {
     public boolean cutAndPaste(Shape shapeToPaste, NestingShape destination){
         boolean success = true;
         //shapeToPaste already exists in the destination , do nothing and return true
-        if(destination.contains(shapeToPaste)) return success;
+        if(destination.contains(shapeToPaste)) return true;
 
         try {
             //store original parent before remove
