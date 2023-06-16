@@ -4,7 +4,6 @@ import bounce.*;
 
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
-import javax.swing.tree.TreePath;
 
 /*
  * TODO Complete this class to have a functioning Bounce application
