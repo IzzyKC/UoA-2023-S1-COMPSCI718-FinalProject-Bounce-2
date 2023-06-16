@@ -151,9 +151,6 @@ public class ShapeModel {
         }catch(IllegalArgumentException e){
             System.out.println("error: " + e.getMessage());
             success = false;
-        }catch(Exception e){
-            System.out.println("error: " + e.getMessage());
-            success = false;
         }
 
         return success;
