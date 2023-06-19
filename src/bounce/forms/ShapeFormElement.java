@@ -151,7 +151,7 @@ public class ShapeFormElement extends FormElementComponent {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 try {
-                    putFieldValue(TEXT, e.getDocument().getText(0, e.getDocument().getLength() - 1));
+                    putFieldValue(TEXT, e.getDocument().getText(0, e.getDocument().getLength()));
                 } catch (BadLocationException e1) {
                 }
             }
