@@ -127,28 +127,29 @@ public class ShapeModel {
             listener.update(event);
         }
     }
+
     /*
      * TODO Implement appropriate method(s) for the cut and paste feature
      *  where a selected shape is moved to a new destination.
      *  Hint: the destination is a NestingShape
      */
-    public boolean cutAndPaste(Shape shapeToPaste, NestingShape destination){
+    public boolean cutAndPaste(Shape shapeToPaste, NestingShape destination) {
         boolean success = true;
         //shapeToPaste already exists in the destination , do nothing and return true
-        if(destination.contains(shapeToPaste)) return true;
+        if (destination.contains(shapeToPaste)) return true;
 
         try {
             //store original parent before remove
             NestingShape parent = shapeToPaste.parent();
-            if(parent != null) {
+            if (parent != null) {
                 int index = shapeToPaste.parent.indexOf(shapeToPaste);
                 shapeToPaste.parent.remove(shapeToPaste);
                 fire(ShapeModelEvent.makeShapeRemovedEvent(shapeToPaste, parent, index, this));
             }
             shapeToPaste.move(destination.width(), destination.height());
             destination.add(shapeToPaste);
-            fire(ShapeModelEvent.makeShapeAddedEvent(shapeToPaste,this));
-        }catch(IllegalArgumentException e){
+            fire(ShapeModelEvent.makeShapeAddedEvent(shapeToPaste, this));
+        } catch (IllegalArgumentException e) {
             System.out.println("error: " + e.getMessage());
             success = false;
         }

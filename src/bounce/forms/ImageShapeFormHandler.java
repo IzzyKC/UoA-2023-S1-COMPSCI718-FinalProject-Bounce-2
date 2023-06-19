@@ -22,7 +22,7 @@ public class ImageShapeFormHandler implements FormHandler {
     private ShapeModel model;
     private NestingShape parentOfNewShape;
 
-    private SwingWorker<Long,Void> worker;
+    private SwingWorker<Long, Void> worker;
 
 
     public ImageShapeFormHandler(ShapeModel model, NestingShape parent) {
@@ -37,10 +37,10 @@ public class ImageShapeFormHandler implements FormHandler {
         worker.execute();
     }
 
-    private class ImageShapeFormWorker extends SwingWorker<Long, Void>{
+    private class ImageShapeFormWorker extends SwingWorker<Long, Void> {
         private Form form;
 
-        public ImageShapeFormWorker(Form form){
+        public ImageShapeFormWorker(Form form) {
             this.form = form;
         }
 

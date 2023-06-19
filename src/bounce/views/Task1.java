@@ -31,11 +31,11 @@ public class Task1 implements TreeModel {
 
     @Override
     public Object getChild(Object parent, int index) {
-        try{
-            if(parent instanceof NestingShape){
+        try {
+            if (parent instanceof NestingShape) {
                 return ((NestingShape) parent).shapeAt(index);
             }
-        }catch(IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Index error: " + e.getMessage());
         }
         return null;
@@ -43,7 +43,7 @@ public class Task1 implements TreeModel {
 
     @Override
     public int getChildCount(Object parent) {
-        if(parent instanceof NestingShape)
+        if (parent instanceof NestingShape)
             return ((NestingShape) parent).shapeCount();
         return 0;
     }
@@ -51,7 +51,8 @@ public class Task1 implements TreeModel {
     /**
      * NestingShape can have children, return false;
      * Otherwise, return true(is a leaf)
-     * @param node  a node in the tree, obtained from this data source
+     *
+     * @param node a node in the tree, obtained from this data source
      * @return is a Leaf node
      */
     @Override
@@ -68,15 +69,16 @@ public class Task1 implements TreeModel {
 
     @Override
     public int getIndexOfChild(Object parent, Object child) {
-        if(parent instanceof NestingShape)
+        if (parent instanceof NestingShape)
             return ((NestingShape) parent).indexOf((Shape) child);
 
         return -1;
     }
 
     /**
-     *Adds a listener for the TreeModelEvent posted after the tree changes.
-     * @param l       the listener to add
+     * Adds a listener for the TreeModelEvent posted after the tree changes.
+     *
+     * @param l the listener to add
      */
     @Override
     public void addTreeModelListener(TreeModelListener l) {
@@ -86,7 +88,8 @@ public class Task1 implements TreeModel {
 
     /**
      * Removes a listener previously added with addTreeModelListener
-     * @param l       the listener to remove
+     *
+     * @param l the listener to remove
      */
     @Override
     public void removeTreeModelListener(TreeModelListener l) {

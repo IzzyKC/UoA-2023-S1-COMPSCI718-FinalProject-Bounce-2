@@ -34,13 +34,13 @@ public class Task2 extends Task1 implements ShapeModelListener {
         if (event.eventType() == ShapeModelEvent.EventType.ShapeAdded) {
             TreeModelEvent treeModelEvent = new TreeModelEvent(shapeModel,
                     event.parent().path().toArray(), childIndices, children);
-            for(TreeModelListener  l : this._treeModelListenerList)
+            for (TreeModelListener l : this._treeModelListenerList)
                 l.treeNodesInserted(treeModelEvent);
 
         } else if (event.eventType() == ShapeModelEvent.EventType.ShapeRemoved) {
             TreeModelEvent treeModelEvent = new TreeModelEvent(shapeModel,
                     event.parent() == null ? null : event.parent().path().toArray(), childIndices, children);
-            for(TreeModelListener l: this._treeModelListenerList)
+            for (TreeModelListener l : this._treeModelListenerList)
                 l.treeNodesRemoved(treeModelEvent);
 
         }
